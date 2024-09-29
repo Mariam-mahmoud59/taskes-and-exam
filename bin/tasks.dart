@@ -1,22 +1,48 @@
 void main() {
-  Camera c1 = Camera('Canon EOS R5', 'Black', 45);
-  Camera c2 = Camera('Sony Alpha 1', 'Silver', 50);
+  BankAccount account = BankAccount(
+      accountNumber: 12345, accountHolder: 'John Doe', balance: 1000);
 
-  c1.display();
+  account.display();
+  print("  ");
 
-  c2.display();
+  account.deposit(1000);
+  print("  ");
+  account.display();
+  print("  ");
+  account.withdraw(500);
+  print("  ");
+  account.display();
+  print("  ");
+  account.withdraw(600);
+  print("  ");
+  account.display();
 }
 
-class Camera {
-  String name;
-  String color;
-  int megapixel;
+class BankAccount {
+  int? accountNumber;
+  String? accountHolder;
+  double? balance;
+  BankAccount(
+      {required this.accountNumber,
+      required this.accountHolder,
+      required this.balance});
+  void deposit(double amount) {
+    balance = balance! + amount;
+    print('Deposited $amount into account $accountNumber');
+  }
 
-  Camera(this.name, this.color, this.megapixel);
+  void withdraw(double amount) {
+    if (balance! >= amount) {
+      balance = balance! - amount;
+      print('Withdrew $amount. New balance: $balance');
+    } else {
+      print('Insufficient balance. Cannot withdraw $amount.');
+    }
+  }
 
   void display() {
-    print('Name: $name');
-    print('Color: $color');
-    print('Megapixel: $megapixel');
+    print('Account Number: $accountNumber');
+    print('Account Holder: $accountNumber');
+    print('Balance: $balance');
   }
 }
